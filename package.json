@@ -1,0 +1,28 @@
+{
+  "name": "sync-openclaw",
+  "version": "1.0.0",
+  "description": "OpenClaw 增量同步向导 - 交互式双端对比同步工具",
+  "main": "index.js",
+  "bin": {
+    "sync-openclaw": "./index.js"
+  },
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "compare": "node scripts/compare.js",
+    "plan": "node scripts/plan.js",
+    "verify": "node scripts/verify.js",
+    "start": "node index.js sync"
+  },
+  "keywords": [
+    "openclaw",
+    "sync",
+    "backup",
+    "recovery"
+  ],
+  "author": "OpenClaw Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {}
+}

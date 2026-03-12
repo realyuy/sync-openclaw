@@ -1,0 +1,163 @@
+{
+  "name": "sync-openclaw",
+  "version": "1.0.0",
+  "description": "OpenClaw 增量同步向导 - 交互式双端对比同步工具",
+  "main": "scripts/sync.js",
+  "author": "OpenClaw Team",
+  "license": "MIT",
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "compare": "node scripts/compare.js",
+    "plan": "node scripts/plan.js",
+    "verify": "node scripts/verify.js"
+  },
+  "config": {
+    "defaultSource": "",
+    "defaultTarget": "~/.openclaw",
+    "defaultMode": "selective",
+    "defaultDryRun": true,
+    "stateFile": ".sync-state.json",
+    "reportFile": "SYNC-REPORT.md"
+  },
+  "strategies": {
+    "config": "replace",
+    "channels": "replace",
+    "plugins": "replace",
+    "memory": "merge",
+    "cron": "replace",
+    "skills": "append",
+    "mcp": "replace",
+    "agents": "merge",
+    "scripts": "replace",
+    "tools": "replace",
+    "workspaceConfig": "replace",
+    "workflows": "replace",
+    "taskToolMap": "merge",
+    "obsidian": "skip"
+  },
+  "priorities": {
+    "config": 0,
+    "channels": 0,
+    "plugins": 0,
+    "memory": 1,
+    "cron": 1,
+    "skills": 2,
+    "mcp": 2,
+    "agents": 2,
+    "scripts": 2,
+    "tools": 2,
+    "workspaceConfig": 2,
+    "workflows": 2,
+    "taskToolMap": 2,
+    "obsidian": 3
+  },
+  "syncModules": [
+    {
+      "id": "config",
+      "name": "核心配置",
+      "description": "openclaw.json, mcporter.json",
+      "priority": 0,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "channels",
+      "name": "通道配置",
+      "description": "channels/ 目录",
+      "priority": 0,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "plugins",
+      "name": "插件配置",
+      "description": "plugins/ 目录",
+      "priority": 0,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "memory",
+      "name": "记忆系统",
+      "description": "MEMORY.md, memory/*.md, .learnings",
+      "priority": 1,
+      "defaultStrategy": "merge"
+    },
+    {
+      "id": "cron",
+      "name": "定时任务",
+      "description": "cron/jobs.json",
+      "priority": 1,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "skills",
+      "name": "技能",
+      "description": "skills/ 目录",
+      "priority": 2,
+      "defaultStrategy": "append"
+    },
+    {
+      "id": "mcp",
+      "name": "MCP 服务器",
+      "description": "MCP/, extensions/",
+      "priority": 2,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "agents",
+      "name": "多代理配置",
+      "description": "agents/ 目录",
+      "priority": 2,
+      "defaultStrategy": "merge"
+    },
+    {
+      "id": "scripts",
+      "name": "自动化脚本",
+      "description": "workspace/scripts/",
+      "priority": 2,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "tools",
+      "name": "工具配置",
+      "description": "workspace/tools/",
+      "priority": 2,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "workspaceConfig",
+      "name": "工作区配置",
+      "description": "workspace/config/",
+      "priority": 2,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "workflows",
+      "name": "工作流",
+      "description": "workspace/workflows/",
+      "priority": 2,
+      "defaultStrategy": "replace"
+    },
+    {
+      "id": "taskToolMap",
+      "name": "任务工具映射",
+      "description": "task-tool-map.json",
+      "priority": 2,
+      "defaultStrategy": "merge"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian 联动",
+      "description": "workspace/docs/",
+      "priority": 3,
+      "defaultStrategy": "skip"
+    }
+  ],
+  "sensitivePaths": [
+    "*.key",
+    "*.pem",
+    "*.secret",
+    "*.token",
+    "credentials.json",
+    ".env",
+    ".env.*"
+  ]
+}
